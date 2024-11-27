@@ -1,0 +1,57 @@
+.grid-section {
+    padding: 2rem 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Mengatur kolom grid */
+    gap: 1.5rem; /* Jarak antar card */
+    max-width: 1200px; /* Lebar maksimum grid */
+    margin: 0 auto; /* Pusatkan grid */
+}
+
+.card {
+    background-color: #fff; /* Warna latar belakang card */
+    border-radius: 8px; /* Sudut melengkung */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
+    overflow: hidden; /* Menghindari konten melampaui batas */
+    transition: transform 0.3s; /* Efek transisi saat hover */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efek hover */
+}
+
+.card__image {
+    width: 100%; /* Lebar gambar 100% dari card */
+    height: auto; /* Tinggi otomatis */
+}
+
+.card__content {
+    padding: 1rem; /* Padding di dalam card */
+}
+
+.card__title {
+    font-size: 1.5rem; /* Ukuran font judul */
+    margin: 0.5rem 0; /* Margin atas dan bawah */
+}
+
+.card__description {
+    font-size: 1rem; /* Ukuran font deskripsi */
+    color: #666; /* Warna teks deskripsi */
+}
+
+.card__button {
+    display: inline-block; /* Menjadikan tombol inline-block */
+    margin-top: 1rem; /* Margin atas */
+    padding: 0.5rem 1rem; /* Padding tombol */
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: #fff; /* Warna teks tombol */
+    text-decoration: none; /* Menghilangkan garis bawah */
+    border-radius: 4px; /* Sudut melengkung tombol */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
+.card__button:hover {
+    background-color: #0056b3; /* Warna latar belakang tombol saat hover */
+}

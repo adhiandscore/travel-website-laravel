@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Models\Gallery;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -32,10 +33,25 @@ class TravelPackageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+     private function createSlug($location, $id = null)
+    {
+        $slug = Str::slug($location);
+        $baseSlug = $slug;
+        $count = 1;
+
+        while (TravelPackage::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+            $slug = $baseSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
+
     public function store(TravelPackageRequest $request)
     {
         if($request->validated()) {
-            $slug = Str::slug($request->location, '-');
+            $slug = $this->createSlug($request->location);
             $travel_package = TravelPackage::create($request->validated() + ['slug' => $slug ]);
         }
 
@@ -51,7 +67,7 @@ class TravelPackageController extends Controller
     public function edit(TravelPackage $travel_package)
     {
         $galleries = Gallery::paginate(10);
-        
+
         return view('admin.travel_packages.edit', compact('travel_package','galleries'));
     }
 
@@ -71,6 +87,31 @@ class TravelPackageController extends Controller
         ]);
     }
 
+    public function rate(Request $request, $id) {
+        // Validasi input
+        $request->validate([
+            'rating' => 'required|integer|between:1,5',
+        ]);
+    
+        // Temukan travel package berdasarkan ID
+        $travelPackage = TravelPackage::find($id);
+        if ($travelPackage) {
+            // Simpan rating baru ke tabel ratings
+            $travelPackage->ratings()->create([
+                'rating' => $request->input('rating'),
+            ]);
+    
+            // Hitung rata-rata rating
+            $averageRating = $travelPackage->ratings()->avg('rating');
+            $travelPackage->rating = $averageRating; // Update kolom rating di travel_packages
+            $travelPackage->save();
+    
+            return redirect()->back()->with('message', 'Rating berhasil disimpan!');
+        }
+    
+        return redirect()->back()->with('error', 'Travel package tidak ditemukan.');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -83,4 +124,6 @@ class TravelPackageController extends Controller
             'alert-type' => 'danger'
         ]);
     }
+
+
 }

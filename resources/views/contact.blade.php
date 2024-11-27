@@ -15,8 +15,8 @@
               <div class="bg__overlay">
                 <div class="islands__container container">
                   <div class="islands__data">
-                    <h2 class="islands__subtitle">Need Travel</h2>
-                    <h1 class="islands__title">Contact Us</h1>
+                    <h2 class="islands__subtitle">Bingung Mencari Wisata?</h2>
+                    <h1 class="islands__title">Kontak Kami</h1>
                   </div>
                 </div>
               </div>
@@ -37,12 +37,10 @@
 
           <div class="contact__content">
             <div class="contact__data">
-              <span class="section__subtitle">Need Help</span>
-              <h2 class="section__title">Don't hesitate to contact us</h2>
+              <span class="section__subtitle">Perlu Bantuan</span>
+              <h2 class="section__title">Jangan ragu untuk menghubungi kami</h2>
               <p class="contact__description">
-                Is there a problem finding places for yout next trip? Need a
-                guide in first trip or need a consultation about traveling? just
-                contact us.
+                Apakah ada masalah dalam menemukan tempat untuk perjalanan Anda berikutnya? Butuh panduan di perjalanan pertama atau butuh konsultasi seputar traveling? cukup hubungi kami.
               </p>
             </div>
 
@@ -52,46 +50,49 @@
                   <i class="bx bxs-phone-call"></i>
                   <div>
                     <h3 class="contact__card-title">Call</h3>
-                    <p class="contact__card-description">022.321.165.19</p>
+                    <p class="contact__card-description">085712312941</p>
                   </div>
                 </div>
 
-                <button class="button contact__card-button">Call Now</button>
+                <a href="https://api.whatsapp.com/send?phone=6285712312941" target="blank"><button class="button contact__card-button">Call Now</button></a>
               </div>
               <div class="contact__card-box">
                 <div class="contact__card-info">
                   <i class="bx bxs-message-rounded-dots"></i>
                   <div>
                     <h3 class="contact__card-title">Whatsapp</h3>
-                    <p class="contact__card-description">022.321.165.19</p>
+                    <p class="contact__card-description">085712312941</p>
                   </div>
                 </div>
 
-                <button class="button contact__card-button">Chat Now</button>
+                <a href="https://api.whatsapp.com/send?phone=6285712312941" target="blank"><button class="button contact__card-button">Chat Now</button></a>
+                {{-- <button class="button contact__card-button">Chat Now</button> --}}
               </div>
               <div class="contact__card-box">
                 <div class="contact__card-info">
                   <i class="bx bxs-video"></i>
                   <div>
                     <h3 class="contact__card-title">Video Call</h3>
-                    <p class="contact__card-description">022.321.165.19</p>
+                    <p class="contact__card-description">085712312941</p>
                   </div>
                 </div>
 
-                <button class="button contact__card-button">
+                <a href="https://api.whatsapp.com/send?phone=6285712312941" target="blank"><button class="button contact__card-button">Video Call Now</button></a>
+                {{-- <button class="button contact__card-button">
                   Video Call Now
-                </button>
+                </button> --}}
               </div>
               <div class="contact__card-box">
                 <div class="contact__card-info">
                   <i class="bx bxs-phone-call"></i>
                   <div>
                     <h3 class="contact__card-title">Message</h3>
-                    <p class="contact__card-description">022.321.165.19</p>
+                    <p class="contact__card-description">085712312941</p>
                   </div>
                 </div>
 
-                <button class="button contact__card-button">Message Now</button>
+                <a href="https://api.whatsapp.com/send?phone=6285712312941" target="blank"><button class="button contact__card-button">Message Now</button></a>
+                {{-- <button class="button contact__card-button">Message Now</button> --}}
               </div>
             </div>
           </div>

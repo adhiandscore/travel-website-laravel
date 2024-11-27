@@ -8,6 +8,7 @@ use App\Models\TravelPackage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\GalleryRequest;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {

@@ -1,9 +1,9 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Login') }}</p>
-
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="login-title">{{ __('Login') }}</h2>
         <form action="{{ route('login') }}" method="post">
             @csrf
 
@@ -44,11 +44,9 @@
                         </label>
                     </div>
                 </div>
-                <!-- /.col -->
                 <div class="col-4">
                     <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
                 </div>
-                <!-- /.col -->
             </div>
         </form>
 
@@ -57,6 +55,57 @@
                 <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
             </p>
         @endif
+
+        <div class="register-link">
+            <p>Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar di sini</a></p>
+        </div>
     </div>
-    <!-- /.login-card-body -->
+</div>
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+
+    .login-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
+
+    .login-title {
+        font-family: Poppins;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .input-group {
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .register-link a {
+        font-weight: bold;
+    }
+</style>
 @endsection

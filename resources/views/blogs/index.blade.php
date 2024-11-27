@@ -14,8 +14,8 @@
 
               <div class="islands__container container">
                 <div class="islands__data">
-                  <h2 class="islands__subtitle">Our</h2>
-                  <h1 class="islands__title">Blog</h1>
+                  <h2 class="islands__subtitle">Semua Blog Kami</h2>
+                  <h1 class="islands__title">Blog & Berita</h1>
                 </div>
               </div>
             </section>
@@ -27,10 +27,10 @@
       <section class="blog section" id="blog">
         <div class="blog__container container">
           <span class="section__subtitle" style="text-align: center"
-            >All Blog</span
+            >Semua Blog</span
           >
           <h2 class="section__title" style="text-align: center">
-            Find The Best Travel Story
+            Temukan Kisah Perjalanan Terbaik
           </h2>
 
           <div class="blog__content grid">

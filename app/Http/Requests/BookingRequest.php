@@ -9,24 +9,20 @@ class BookingRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'number_phone' => 'required',
-            'date' => ['required', 'date'],
-            'travel_package_id' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'number_phone' => 'required|string|max:15', // Tambahkan nomor telepon
+            'date' => 'required|date', // Tambahkan tanggal
+            'travel_package_id' => 'required|exists:travel_packages,id', // ID paket wisata
+            // Tambahkan aturan validasi lainnya sesuai kebutuhan
         ];
+    }
+
+    public function authorize()
+    {
+        return true; // Pastikan untuk mengatur ini sesuai dengan kebutuhan otorisasi Anda
     }
 }

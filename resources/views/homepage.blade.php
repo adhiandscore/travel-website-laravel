@@ -1,4 +1,7 @@
 @extends('layouts.frontend')
+@props(['rate'])
+
+
 
 @section('content')
 <!--==================== HOME ====================-->
@@ -7,27 +10,20 @@
         <div>
             <!--========== ISLANDS 1 ==========-->
             <section class="islands">
-                <img
-                    src="{{ asset('frontend/assets/img/hero.jpg') }}"
-                    alt=""
-                    class="islands__bg"
-                />
-                <div class="bg__overlay">
+                <img src="{{ asset('frontend/assets/img/hero.jpg') }}" alt="" class="islands__bg" />
+                <div class="bg__overlay" style="background-color: rgba(0, 0, 0, 0.5);">
                     <div class="islands__container container">
-                        <div
-                            class="islands__data"
-                            style="z-index: 99; position: relative"
-                        >
-                            <h2 class="islands__subtitle">
-                                Explore
-                            </h2>
-                            <h1 class="islands__title">
-                                Wonderfull World
+                        <div class="islands__data" style="z-index: 99; position: relative">
+
+                            <h1 class="islands__title" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+                                Indonesia Wonderful
                             </h1>
                             <p class="islands__description">
-                                It's the perfect time travel and
-                                enjoy the <br />
-                                beauty of the world.
+                                Solusi Perjalanan Anda
+                                Dengan Memberikan Pengalaman yang berharga <br />
+                                Hanya di <span
+                                    style="color:bisque; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Bintang
+                                    Mulia Tour dan Travel</span>
                             </p>
                         </div>
                     </div>
@@ -38,10 +34,7 @@
 </section>
 
 <!--==================== LOGOS ====================-->
-<section
-    class="logos"
-    style="margin-top: 9rem; padding-bottom: 3rem"
->
+<section class="logos" style="margin-top: 9rem; padding-bottom: 3rem">
     <div class="logos__container container grid">
         <div class="logos__img">
             <img src="{{ asset('frontend/assets/img/tripadvisor.png') }}" alt="" />
@@ -61,31 +54,32 @@
 <!--==================== POPULAR ====================-->
 <section class="section" id="popular">
     <div class="container">
-        <span class="section__subtitle" style="text-align: center"
-            >Best Choice</span
-        >
+        <span class="section__subtitle" style="text-align: center">Pilihan Terbaik Wisata</span>
         <h2 class="section__title" style="text-align: center">
-            Popular Places
+            Tempat Wisata Paling Populer dan Banyak diminati wisatawan lokal dan mancanegara!
         </h2>
+
+
 
         <div class="popular__container swiper">
             <div class="swiper-wrapper">
                 @foreach($travel_packages as $travel_package)
                     <article class="popular__card swiper-slide">
                         <a href="{{ route('travel_package.show', $travel_package->slug) }}">
-                            <img
-                                src="{{ Storage::url($travel_package->galleries->first()->images) }}"
-                                alt=""
-                                class="popular__img"
-                            />
+                            <img src="{{ Storage::url($travel_package->galleries->first()->images) }}" alt=""
+                                class="popular__img" />
                             <div class="popular__data">
                                 <h2 class="popular__price">
-                                    <span>$</span>{{ number_format($travel_package->price,2) }}
+                                    <span>Rp</span>{{ number_format($travel_package->price) }}
                                 </h2>
                                 <h3 class="popular__title">
                                     {{ $travel_package->location}}
                                 </h3>
                                 <p class="popular__description">{{ $travel_package->type }}</p>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i class="bx {{ $i <= $travel_package->rating ? 'bxs-star' : 'bx-star' }}"
+                                        aria-hidden="true"></i>
+                                @endfor
                             </div>
                         </a>
                     </article>
@@ -115,25 +109,22 @@
 
         <div class="value__content">
             <div class="value__data">
-                <span class="section__subtitle">Why Choose Us</span>
+                <span class="section__subtitle">Mengapa Memilih Kami?</span>
                 <h2 class="section__title">
-                    Experience That We Promise To You
+                    Pengalaman Yang Kami Janjikan Kepada Anda
                 </h2>
                 <p class="value__description">
-                    We always ready to serve by providing the best
-                    service for you. We make a good choices to
-                    travel around the world.
+                    Kami selalu siap melayani dengan memberikan pelayanan terbaik untuk Anda. Kami membuat pilihan yang
+                    baik untuk bepergian keliling dunia.
                 </p>
             </div>
 
             <div class="value__accordion">
                 <div class="value__accordion-item">
                     <header class="value__accordion-header">
-                        <i
-                            class="bx bxs-shield-x value-accordion-icon"
-                        ></i>
+                        <i class="bx bxs-shield-x value-accordion-icon"></i>
                         <h3 class="value__accordion-title">
-                            Best places in the world
+                            Wisata Terbaik di Indonesia
                         </h3>
                         <div class="value__accordion-arrow">
                             <i class="bx bxs-down-arrow"></i>
@@ -150,11 +141,9 @@
                 </div>
                 <div class="value__accordion-item">
                     <header class="value__accordion-header">
-                        <i
-                            class="bx bxs-x-square value-accordion-icon"
-                        ></i>
+                        <i class="bx bxs-x-square value-accordion-icon"></i>
                         <h3 class="value__accordion-title">
-                            Affordable price for you
+                            Harga Terjangkau untuk Anda
                         </h3>
                         <div class="value__accordion-arrow">
                             <i class="bx bxs-down-arrow"></i>
@@ -170,11 +159,9 @@
                 </div>
                 <div class="value__accordion-item">
                     <header class="value__accordion-header">
-                        <i
-                            class="bx bxs-bar-chart-square value-accordion-icon"
-                        ></i>
+                        <i class="bx bxs-bar-chart-square value-accordion-icon"></i>
                         <h3 class="value__accordion-title">
-                            Best plan for your time
+                            Rencana Terbaik untuk Waktu Anda
                         </h3>
                         <div class="value__accordion-arrow">
                             <i class="bx bxs-down-arrow"></i>
@@ -189,11 +176,9 @@
                 </div>
                 <div class="value__accordion-item">
                     <header class="value__accordion-header">
-                        <i
-                            class="bx bxs-check-square value-accordion-icon"
-                        ></i>
+                        <i class="bx bxs-check-square value-accordion-icon"></i>
                         <h3 class="value__accordion-title">
-                            Security guarantee
+                            Jaminan Keamanan
                         </h3>
                         <div class="value__accordion-arrow">
                             <i class="bx bxs-down-arrow"></i>
@@ -215,22 +200,16 @@
 <!-- blog -->
 <section class="blog section" id="blog">
     <div class="blog__container container">
-        <span class="section__subtitle" style="text-align: center"
-            >Our Blog</span
-        >
+        <span class="section__subtitle" style="text-align: center">Blog Kami</span>
         <h2 class="section__title" style="text-align: center">
-            The Best Trip For You
+            Perjalanan Terbaik untuk Anda
         </h2>
 
         <div class="blog__content grid">
             @foreach($blogs as $blog)
                 <article class="blog__card">
                     <div class="blog__image">
-                        <img
-                            src="{{ Storage::url($blog->image) }}"
-                            alt=""
-                            class="blog__img"
-                        />
+                        <img src="{{ Storage::url($blog->image) }}" alt="" class="blog__img" />
                         <a href="{{ route('blog.show', $blog->slug) }}" class="blog__button">
                             <i class="bx bx-right-arrow-alt"></i>
                         </a>

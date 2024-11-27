@@ -25,7 +25,10 @@ class TravelPackageRequest extends FormRequest
             case 'POST' : {
                 return [
                     'type' => 'required',
+                    'level' => 'required',
                     'location' => 'required',
+                    'facility' => 'required',
+                    'duration' => 'required',
                     'price' => 'required',
                     'description' => 'required'
                 ];
@@ -35,6 +38,8 @@ class TravelPackageRequest extends FormRequest
                 return [
                     'type' => 'required',
                     'location' => 'required',
+                    // 'facility' => 'required',
+                    // 'duration' => 'required',
                     'price' => 'required',
                     'description' => 'required'
                 ];

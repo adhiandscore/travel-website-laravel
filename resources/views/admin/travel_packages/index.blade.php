@@ -23,35 +23,47 @@
                     <div class="card">
                         <div class="card-body p-0">
 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Type</th>
-                                        <th>Location</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($travel_packages as $travel_package)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $travel_package->type }}</td>
-                                        <td>{{ $travel_package->location }}</td>
-                                        <td>{{ $travel_package->price }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>              
-                                            <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.travel_packages.destroy', [$travel_package]) }}" method="post">
-                                                @csrf 
-                                                @method('delete')
-                                                <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
-                                            </form>                              
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                            @if($travel_packages->isEmpty())
+                                <div class="alert alert-warning text-center">
+                                    Tidak ada paket wisata yang tersedia.
+                                </div>
+                            @else
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tipe</th>
+                                            <th>Kelas</th>
+                                            <th>Lokasi</th>
+                                            <th>Fasilitas</th>
+                                            <th>Durasi</th>
+                                            <th>Harga</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($travel_packages as $travel_package)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $travel_package->type }}</td>
+                                            <td>{{ $travel_package->level }}</td>
+                                            <td>{{ $travel_package->location }}</td>
+                                            <td>{{ $travel_package->facility }}</td>
+                                            <td>{{ $travel_package->duration }}</td>
+                                            <td>{{ $travel_package->price }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>
+                                                <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.travel_packages.destroy', [$travel_package]) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
                         <!-- /.card-body -->
 

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12 d-flex justify-content-between">
-                    <h1 class="m-0">{{ __('Form Edit') }}</h1>
+                    <h1 class="m-0">Edit Paket Wisata</h1>
                     <a href="{{ route('admin.travel_packages.index') }}" class="btn btn-primary"> <i class="fa fa-arrow-left"></i> </a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,8 +26,8 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
-                                        <th>Images</th>
+                                        <th>Nama</th>
+                                        <th>Gambar</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,12 +42,12 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.travel_packages.galleries.edit', [$travel_package,$gallery]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>              
+                                            <a href="{{ route('admin.travel_packages.galleries.edit', [$travel_package,$gallery]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>
                                             <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.travel_packages.galleries.destroy', [$travel_package,$gallery]) }}" method="post">
-                                                @csrf 
+                                                @csrf
                                                 @method('delete')
                                                 <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
-                                            </form>                              
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -63,28 +63,28 @@
                 <div class="col-lg-12">
                     <div class="card p-3">
                         <form method="post" action="{{ route('admin.travel_packages.galleries.store', [$travel_package]) }}" enctype="multipart/form-data">
-                            @csrf 
+                            @csrf
                             <div class="form-group row border-bottom pb-4">
-                                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                <label for="name" class="col-sm-2 col-form-label">Nama Destinasi</label>
                                 <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder="example: Kuta">
                                 </div>
                             </div>
-                           
+
                             <div class="form-group row border-bottom pb-4">
                                 <label for="images" class="col-sm-2 col-form-label">Images</label>
                                 <div class="col-sm-10">
                                 <input type="file" class="form-control" name="images" value="{{ old('images') }}" id="images">
                                 </div>
                             </div>
-                           
+
                             <button type="submit" class="btn btn-success">Save</button>
                         </form>
                     </div>
 
                     <div class="card p-3">
                         <form method="post" action="{{ route('admin.travel_packages.update', [$travel_package]) }}">
-                            @csrf 
+                            @csrf
                             @method('put')
                             <div class="form-group row border-bottom pb-4">
                                 <label for="type" class="col-sm-2 col-form-label">Type</label>
@@ -93,9 +93,27 @@
                                 </div>
                             </div>
                             <div class="form-group row border-bottom pb-4">
+                                <label for="type" class="col-sm-2 col-form-label">Kelas</label>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control" name="level" value="{{ old('level', $travel_package->type) }}" id="level" placeholder="Gold, Silver, Bronze">
+                                </div>
+                            </div>
+                            <div class="form-group row border-bottom pb-4">
                                 <label for="Location" class="col-sm-2 col-form-label">Location</label>
                                 <div class="col-sm-10">
                                 <input text="text" class="form-control" id="Location" name="location" value="{{ old('location', $travel_package->location) }}" placeholder="example: Bali, Indonesia">
+                                </div>
+                            </div>
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="price" class="col-sm-2 col-form-label">Fasilitas</label>
+                                <div class="col-sm-10">
+                                <input text="number" class="form-control" id="facility" name="price" value="{{ old('facility', $travel_package->facility) }}" placeholder="facility">
+                                </div>
+                            </div>
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="price" class="col-sm-2 col-form-label">Durasi</label>
+                                <div class="col-sm-10">
+                                <input text="number" class="form-control" id="duration" name="price" value="{{ old('duration', $travel_package->duration) }}" placeholder="duration">
                                 </div>
                             </div>
                             <div class="form-group row border-bottom pb-4">

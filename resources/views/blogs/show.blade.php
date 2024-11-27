@@ -67,10 +67,10 @@
       <section class="blog" id="blog">
         <div class="blog__container container">
           <span class="section__subtitle" style="text-align: center"
-            >Related Blog</span
+            >Blog Terkait</span
           >
           <h2 class="section__title" style="text-align: center">
-            Find The Best Places
+            Temukan Tempat Terbaik
           </h2>
 
           <div class="blog__content grid">

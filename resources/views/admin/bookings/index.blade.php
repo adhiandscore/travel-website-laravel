@@ -22,15 +22,19 @@
                     <div class="card">
                         <div class="card-body p-0">
 
+                            <!-- Form Booking -->
+                         
+                            <!-- End of Form Booking -->
+
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Number Phone</th>
-                                        <th>Date</th>
-                                        <th>Travel Package</th>
+                                        <th>No. HP</th>
+                                        <th>Tanggal</th>
+                                        <th>Paket Wisata</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,13 +46,14 @@
                                         <td>{{ $booking->email }}</td>
                                         <td>{{ $booking->number_phone }}</td>
                                         <td>{{ $booking->date }}</td>
-                                        <td>{{ $booking->travel_package->location }}</td>
+                                        <td>{{ optional($booking->travel_package)->location ?? 'Tidak tersedia' }} - {{ optional($booking->travel_package)->level ?? 'Tidak tersedia' }} - {{ optional($booking->travel_package)->type ?? 'Tidak tersedia' }}</td>
+                                        
                                         <td>
                                             <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.bookings.destroy', [$booking]) }}" method="post">
-                                                @csrf 
+                                                @csrf
                                                 @method('delete')
                                                 <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
-                                            </form>                              
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

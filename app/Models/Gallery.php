@@ -10,4 +10,10 @@ class Gallery extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+     // Menambahkan relasi dengan TravelPackage
+     public function travelPackage()
+     {
+         return $this->belongsTo(TravelPackage::class);
+     }
 }

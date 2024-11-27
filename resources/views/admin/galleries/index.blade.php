@@ -27,9 +27,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Type</th>
-                                        <th>Location</th>
-                                        <th>Price</th>
+                                        <th>Tipe</th>
+                                        <th>Lokasi</th>
+                                        <th>Harga</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,12 +41,12 @@
                                         <td>{{ $travel_package->location }}</td>
                                         <td>{{ $travel_package->price }}</td>
                                         <td>
-                                            <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>              
+                                            <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>
                                             <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.travel_packages.destroy', [$travel_package]) }}" method="post">
-                                                @csrf 
+                                                @csrf
                                                 @method('delete')
                                                 <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
-                                            </form>                              
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

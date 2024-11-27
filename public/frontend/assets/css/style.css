@@ -211,7 +211,11 @@ body.dark-theme {
   font-size: 1.25rem;
   color: var(--second-color);
 }
-
+.nav__logo img{
+  position: relative;
+  height: 50px;
+  width: 100px;
+}
 @media screen and (max-width: 1023px) {
   .nav__menu {
     position: fixed;
@@ -387,7 +391,7 @@ body.dark-theme {
 .logos__container {
   padding-top: 2rem;
   -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 3rem 2rem;
   justify-items: center;
 }
