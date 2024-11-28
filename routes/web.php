@@ -53,9 +53,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('travel_packages/{id}/rate', [\App\Http\Controllers\Admin\TravelPackageController::class, 'rate'])->name('travel_packages.rate');
 
 // Topsis
-Route::get('/topsis', [TopsisController::class, 'getRecommendedPackages'])->name('topsis.index');
-
-Route::get('travel-packages', 'TopsisController@getRecommendedPackages')->name('travel_packages.index');
+// Route::get('travel-packages', [\App\Http\Controllers\TopsisController::class, 'getRecommendedPackages'])->name('travel_packages.index');
 // paket travel
 Route::get('travel-packages', [\App\Http\Controllers\TravelPackageController::class, 'index'])->name('travel_package.index');
 Route::get('travel-packages/{travel_package}', [\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_package.show');
