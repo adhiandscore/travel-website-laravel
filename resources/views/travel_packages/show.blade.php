@@ -32,41 +32,6 @@
   </div>
 </section>
 
-
-
-<div class="contact-form py-16 bg-gray-50">
-  <h2 class="form-title text-2xl font-bold text-center">Booking Sekarang</h2>
-  <form action="{{ route('booking.store') }}" method="POST" class="mt-8 max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6">
-    @csrf
-    <div class="form-row grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="form-group">
-        <label for="name" class="block text-gray-700">Nama</label>
-        <input type="text" name="name" class="form-control mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-secondary" required />
-      </div>
-      <div class="form-group">
-        <label for="email" class="block text-gray-700">Email</label>
-        <input type="email" name="email" class="form-control mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-secondary" required />
-      </div>
-    </div>
-    <div class="form-row grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <div class="form-group">
-        <label for="number_phone" class="block text-gray-700">No. HP</label>
-        <input type="text" name="number_phone" class="form-control mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-secondary" required />
-      </div>
-      <div class="form-group">
-        <label for="date" class="block text-gray-700">Tanggal</label>
-        <input type="date" name="date" class="form-control mt-1 w-full border border-gray-300 rounded-lg p-2 focus:ring focus:ring-secondary" required />
-      </div>
-    </div>
-    <div class="form-group mt-6">
-      <label for="travel_package_id" class="block text-gray-700">Paket Wisata</label>
-      <p class="mt-2 text-gray-600">{{ $travel_package->location }}, <span class="font-semibold">{{ $travel_package->level }}</span></p>
-      <input type="hidden" name="travel_package_id" value="{{ $travel_package->id }}" />
-    </div>
-    <button type="submit" class="btn btn-booking w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Booking Sekarang</button>
-  </form>
-</div>
-
 <section class="popular-section py-16 bg-gray-100" id="popular">
   <div class="container mx-auto">
     <span class="section__subtitle block text-center text-secondary text-lg font-semibold">Paket Perjalanan</span>
