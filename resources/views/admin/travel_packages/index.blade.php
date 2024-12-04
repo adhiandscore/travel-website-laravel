@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -16,19 +16,20 @@
 
     <!-- Main content -->
     <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
 
-                    <div class="card">
-                        <div class="card-body p-0">
+                <div class="card">
+                    <div class="card-body p-0">
 
-                            @if($travel_packages->isEmpty())
-                                <div class="alert alert-warning text-center">
-                                    Tidak ada paket wisata yang tersedia.
-                                </div>
-                            @else
-                                <table class="table">
+                        @if($travel_packages->isEmpty())
+                            <div class="alert alert-warning text-center">
+                                Tidak ada paket wisata yang tersedia.
+                            </div>
+                        @else
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -52,30 +53,37 @@
                                             <td>{{ $travel_package->duration }}</td>
                                             <td>{{ $travel_package->price }}</td>
                                             <td>
-                                                <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>
-                                                <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.travel_packages.destroy', [$travel_package]) }}" method="post">
+                                                <a href="{{ route('admin.travel_packages.edit', [$travel_package]) }}" class="btn btn-sm btn-info">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <form onclick="return confirm('Are you sure?');" class="d-inline-block" action="{{ route('admin.travel_packages.destroy', [$travel_package]) }}" method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                            @endif
-                        </div>
-                        <!-- /.card-body -->
+                            </div>
+                        @endif
 
-                        <div class="card-footer clearfix">
-                            {{ $travel_packages->links() }}
-                        </div>
                     </div>
+                    <!-- /.card-body -->
 
+                    <div class="card-footer clearfix">
+                        {{ $travel_packages->links() }}
+                    </div>
                 </div>
+
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
     <!-- /.content -->
 @endsection

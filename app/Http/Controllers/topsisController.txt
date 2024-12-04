@@ -1,3 +1,11 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Booking;
+use App\Models\TravelPackage;
+
 
 class TopsisController extends Controller
 {
@@ -13,6 +21,8 @@ class TopsisController extends Controller
                 'rating' => 0.5  // Bobot untuk rating
             ];
         }
+
+        
 
         $packages = TravelPackage::with('bookings')->get(); // Ambil semua paket beserta data booking
         $rankedPackages = $this->calculateTopsisRank($packages, $weights); // Hitung peringkat menggunakan TOPSIS
@@ -35,7 +45,7 @@ class TopsisController extends Controller
         if ($bookings->count() > 0) {
             // Bisa tambahkan variasi bobot berdasarkan logika tertentu jika dibutuhkan
         }
-    
+        
         return $weights;
     }
 
@@ -48,6 +58,7 @@ class TopsisController extends Controller
             'rating' => $package->rating // Rating paket
         ];
     }
+    
     return $decisionMatrix;
 }
 
@@ -65,6 +76,7 @@ class TopsisController extends Controller
                 $normalizedRow[$criterion] = $normalizedValue;
             }
             $normalizedMatrix[] = $normalizedRow;
+            
         }
         return $normalizedMatrix;
     }
@@ -80,6 +92,7 @@ class TopsisController extends Controller
         $weightedMatrix[] = $weightedRow;
     }
     return $weightedMatrix;
+    
 }
 
 private function determineIdealAndAntiIdealSolutions($weightedMatrix)
@@ -99,6 +112,7 @@ private function determineIdealAndAntiIdealSolutions($weightedMatrix)
     }
 
     return [$idealSolution, $antiIdealSolution];
+    
 }
 
     private function calculateDistances($weightedMatrix, $idealSolution, $antiIdealSolution)
@@ -159,11 +173,11 @@ private function determineIdealAndAntiIdealSolutions($weightedMatrix)
         // Tambahkan skor ke paket dan urutkan
         return $packages->map(function ($package, $index) use ($scores) {
             $package->topsis_score = $scores[$index];
-            dd($package);
+            
             return $package;
         })->sortByDesc('topsis_score'); // Urutkan berdasarkan skor
-
         
+
     }
     
 }
