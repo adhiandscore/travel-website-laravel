@@ -90,7 +90,7 @@
             <!-- theme -->
             <i class="bx bx-moon change-theme" id="theme-button"></i>
 
-            <a href="{{ route('login') }}" class="button nav__button">Booking</a>
+            <a href="{{ route('login') }}" class="button nav__button">Admin</a>
         </nav>
     </header>
 

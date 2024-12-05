@@ -5,7 +5,7 @@
 <!--==================== HOME ====================-->
 
 <section class="relative bg-cover bg-center"
-  style="background-image: url('{{ asset('frontend/assets/img/bali.jpg') }}'); height: 850px;">
+  style="background-image: url('{{ asset('frontend/assets/img/bali.jpg') }}'); height: 1050px;">
   <!-- Card Container -->
   <div
     class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-50 shadow-lg rounded-lg p-6 max-w-md w-full">
@@ -26,17 +26,17 @@
   </div>
 </section>
 
-<div class="container">
-  <div class="card card border-0">
+<div class="container" >
+  <div class="card card border-0" id="targetContent">
     <!-- Form Pencarian yang sudah ada -->
     <div class="bg-blue-500 p-9 rounded-lg ">
 
       <!-- Form tambahan di bawahnya -->
-      <div class="grid grid-cols-4 gap-4 mt-6">
+      <div class="grid grid-cols-4 gap-4 mt-6" >
         <div class="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center">
           <span class="text-center text-gray-700 font-semibold">Pencarian Lokasi</span>
         </div>
-        <div class="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center">
+        <div class="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center"  >
           <span class="text-center text-gray-700 font-semibold">Tentukan Tanggal</span>
         </div>
         <div class="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center">
@@ -62,7 +62,7 @@
     <span class="text-orange-500 text-lg font-medium">
       Semua
     </span>
-    <h2 class="text-4xl font-bold mb-20 text-blue-800 mt-2" id="targetContent" >
+    <h2 class="text-4xl font-bold mb-20 text-blue-800 mt-2"  >
       Paket Wisata di Indonesia
     </h2>
   </div>
@@ -105,7 +105,7 @@ document.getElementById('searchButton').addEventListener('click', function(e) {
   const target = document.getElementById('targetContent');
   if (!target) return; // Pastikan elemen target ada
 
-  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+  const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (target.offsetHeight / 2);
   const startPosition = window.pageYOffset;
   const distance = targetPosition - startPosition;
   const duration = 1000; // Durasi dalam milidetik (misalnya, 1000 ms = 1 detik)
