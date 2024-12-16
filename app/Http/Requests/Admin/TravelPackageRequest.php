@@ -19,31 +19,24 @@ class TravelPackageRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
-    {
-        switch($this->method()) {
-            case 'POST' : {
-                return [
-                    'type' => 'required',
-                    'level' => 'required',
-                    'location' => 'required',
-                    'facility' => 'required',
-                    'duration' => 'required',
-                    'price' => 'required',
-                    'description' => 'required'
-                ];
-            }
-            case 'PUT':
-            case 'PATCH': {
-                return [
-                    'type' => 'required',
-                    'location' => 'required',
-                    // 'facility' => 'required',
-                    // 'duration' => 'required',
-                    'price' => 'required',
-                    'description' => 'required'
-                ];
-            }
-        }
-    }
+    public function rules()
+{
+    return [
+        'type' => 'required|string|max:255',
+        'location' => 'required|string|max:255',
+        'destination' => 'required|string',
+        'facility' => 'required|string', // atau bisa 'required|string' jika dalam bentuk string JSON
+        'acomodation' => 'required|string', // sesuai dengan format yang diharapkan (JSON atau array)
+        'consumption' => 'required|string',
+        'souvenir' => 'nullable|string',
+        'documentation' => 'nullable|string',
+        'price' => 'required|numeric',
+        'duration' => 'required|string',
+        'seat_capacity' => 'required|string',
+        'bonus' => 'nullable|string',
+        'description' => 'nullable|string',
+        'rating' => 'nullable|numeric',
+    ];
+}
+
 }

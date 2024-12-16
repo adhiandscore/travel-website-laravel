@@ -96,84 +96,12 @@
 
     <!--==================== MAIN ====================-->
     <div class="min-h-screen flex flex-column">
-        <main class="main flex-grow">
+        <main class="main flex-grow pb-96">
             @yield('content')
         </main>
     </div>
     <!--==================== FOOTER ====================-->
-    <footer class="footer section">
-        <div class="footer__container container grid">
-            <div>
-                <a href="{{ route('homepage') }}" class="footer__logo">
-                    <img src="{{ asset('frontend/assets/img/logo.png') }}" style="width:120px" alt="">
-                </a>
-                <p class="footer__description">
-                    Bintang Mulia Tour dan Travel <br />
-                    Memberikan Pelayanan dalam Berwisata
-                </p>
-            </div>
-
-            <div class="footer__content">
-                <div>
-                    <h3 class="footer__title">Tentang</h3>
-
-                    <ul class="footer__links">
-                        <li>
-                            <a href="#" class="footer__link">Tentang Kami</a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__link">Fitur </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__link">Berita & Blog</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="footer__title">Dukungan</h3>
-
-                    <ul class="footer__links">
-                        <li>
-                            <a href="#" class="footer__link">FAQs </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__link">Pusat Layanan
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer__link"> Hubungi Kami</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="footer__title">Ikuti Kami</h3>
-
-                    <ul class="footer__social">
-                        <a href="https://www.facebook.com/bintangmuliatour?mibextid=ZbWKwL" class="footer__social-link">
-                            <i class="bx bxl-facebook-circle"></i>
-                        </a>
-                        <a href="https://www.instagram.com/bintangmuliatour?igsh=ejQ5bXZsdzlpc2tv"
-                            class="footer__social-link">
-                            <i class="bx bxl-instagram-alt"></i>
-                        </a>
-                        <a href="#" class="footer__social-link">
-                            <i class="bx bxl-pinterest"></i>
-                        </a>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer__info container">
-            <span class="footer__copy">
-                &#169; Bintang Mulia. All rigths reserved
-            </span>
-            <div class="footer__privacy">
-                <a href="#">Syarat dan Perjanjian</a>
-                <a href="#">Kebijakan Pribadi</a>
-            </div>
-        </div>
-    </footer>
+    
 
     <!--========== SCROLL UP ==========-->
     <a href="#" class="scrollup" id="scroll-up">

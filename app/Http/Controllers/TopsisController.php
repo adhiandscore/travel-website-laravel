@@ -2,189 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Booking;
 use App\Models\TravelPackage;
-
+use App\Helpers\TopsisHelper;
 
 class TopsisController extends Controller
 {
-    public function getRecommendedPackages()
+    public function showFavorites()
     {
-        $user = auth()->user(); // Asumsi pengguna sudah login
-        $weights = $this->getPreferencesFromBookings($user);
+        // Ambil data travel package
+        $travelPackages = TravelPackage::all();
 
-        if (empty($weights)) {
-            // Tetapkan bobot default jika tidak ada booking
-            $weights = [
-                'price' => 0.5,  // Bobot untuk harga
-                'rating' => 0.5  // Bobot untuk rating
-            ];
+        // Handle jika data kosong
+        if ($travelPackages->isEmpty()) {
+            return view('favorites', ['packages' => collect(), 'message' => 'No travel packages available.']);
         }
 
-        $packages = TravelPackage::with('bookings')->get(); // Ambil semua paket beserta data booking
-        $rankedPackages = $this->calculateTopsisRank($packages, $weights);
-
-        // Periksa apakah $rankedPackages sudah diisi sebelum dikirim ke view
-        if ($rankedPackages === null) {
-            abort(500, 'Data tidak tersedia untuk ditampilkan');
-        }
-
-        dd($packages);
-        return view('travel_packages.index', ['packages' => $packages]);
-    }
-
-    private function getPreferencesFromBookings($user)
-    {
-        // Ambil booking user (opsional jika data ini relevan)
-        $bookings = Booking::where('user_id', $user->id)->get();
-
-        // Tetapkan bobot tetap
-        $weights = [
-            'price' => 0.7,  // Fokus harga 50%
-            'rating' => 0.3  // Fokus rating 50%
+        // Persiapkan data untuk TOPSIS
+        $data = [
+            'price' => $travelPackages->pluck('price')->toArray(),
+            'rating' => $travelPackages->pluck('rating')->toArray(),
+            'facility_count' => $travelPackages->pluck('facility_count')->toArray(),
+            'duration_in_days' => $travelPackages->pluck('duration_in_days')->toArray(),
+            'seat_capacity' => $travelPackages->pluck('seat_capacity')->toArray(),
         ];
 
-        // (Opsional) Jika ada booking, tambahkan logika lain di sini
-        if ($bookings->count() > 0) {
-            // Bisa tambahkan variasi bobot berdasarkan logika tertentu jika dibutuhkan
-        }
+        // Bobot kriteria
+        $weights = [
+            'price' => -0.3,
+            'rating' => 0.3,
+            'facility_count' => 0.2,
+            'duration_in_days' => -0.15,
+            'seat_capacity' => 0.1,
+        ];
 
-        return $weights;
+        // Hitung nilai TOPSIS
+        $topsisScores = TopsisHelper::calculateTopsisScore($data, $weights);
+
+        // Gabungkan skor ke setiap paket dan urutkan berdasarkan skor
+        $rankedPackages = $travelPackages->map(function ($package, $index) use ($topsisScores) {
+            $package->score = $topsisScores[$index];
+            return $package;
+        })->sortByDesc('score');
+
+        // Return ke view
+        return view('favorites', ['packages' => $rankedPackages]);
     }
-
-    private function createDecisionMatrix($packages)
-    {
-        $decisionMatrix = [];
-        foreach ($packages as $package) {
-            $decisionMatrix[] = [
-                'price' => $package->price,   // Harga paket
-                'rating' => $package->rating // Rating paket
-            ];
-        }
-
-        return $decisionMatrix;
-    }
-
-    private function normalizeMatrix($matrix)
-    {
-        $normalizedMatrix = [];
-        foreach ($matrix as $packageData) {
-            $normalizedRow = [];
-            foreach ($packageData as $criterion => $value) {
-                $columnValues = array_filter(array_column($matrix, $criterion));
-                $minValue = min($columnValues);
-                $maxValue = max($columnValues);
-
-                $normalizedValue = ($maxValue - $minValue == 0) ? 0 : ($value - $minValue) / ($maxValue - $minValue);
-                $normalizedRow[$criterion] = $normalizedValue;
-            }
-            $normalizedMatrix[] = $normalizedRow;
-
-        }
-        return $normalizedMatrix;
-    }
-
-    private function calculateWeightedNormalizedMatrix($normalizedMatrix, $weights)
-    {
-        $weightedMatrix = [];
-        foreach ($normalizedMatrix as $row) {
-            $weightedRow = [];
-            foreach ($row as $criteria => $value) {
-                $weightedRow[$criteria] = $value * $weights[$criteria]; // Bobot dikalikan nilai normalisasi
-            }
-            $weightedMatrix[] = $weightedRow;
-        }
-        return $weightedMatrix;
-
-    }
-
-    private function determineIdealAndAntiIdealSolutions($weightedMatrix)
-    {
-        $idealSolution = [];
-        $antiIdealSolution = [];
-
-        foreach (array_keys($weightedMatrix[0]) as $criteria) {
-            $column = array_column($weightedMatrix, $criteria);
-            if ($criteria === 'price') {
-                $idealSolution[$criteria] = min($column); // Harga lebih kecil lebih ideal
-                $antiIdealSolution[$criteria] = max($column); // Harga lebih besar anti-ideal
-            } else {
-                $idealSolution[$criteria] = max($column); // Rating lebih besar lebih ideal
-                $antiIdealSolution[$criteria] = min($column); // Rating lebih kecil anti-ideal
-            }
-        }
-
-        return [$idealSolution, $antiIdealSolution];
-
-    }
-
-    private function calculateDistances($weightedMatrix, $idealSolution, $antiIdealSolution)
-    {
-        $distances = [];
-        foreach ($weightedMatrix as $row) {
-            $distanceToIdeal = $this->calculateEuclideanDistance($row, $idealSolution);
-            $distanceToAntiIdeal = $this->calculateEuclideanDistance($row, $antiIdealSolution);
-            $distances[] = [
-                'distanceToIdeal' => $distanceToIdeal,
-                'distanceToAntiIdeal' => $distanceToAntiIdeal,
-            ];
-        }
-        return $distances;
-    }
-
-    private function calculateEuclideanDistance($row, $solution)
-    {
-        $sum = 0;
-        foreach ($solution as $criterion => $value) {
-            $sum += pow(($row[$criterion] - $value), 2);
-        }
-        return sqrt($sum);
-    }
-
-    private function calculateFinalScores($distances)
-    {
-        $scores = [];
-        foreach ($distances as $index => $distance) {
-            $scores[$index] = $distance['distanceToAntiIdeal'] /
-                ($distance['distanceToIdeal'] + $distance['distanceToAntiIdeal']);
-        }
-
-        return $scores;
-
-    }
-
-    private function calculateTopsisRank($packages, $weights)
-    {
-        // Matriks keputusan
-        $decisionMatrix = $this->createDecisionMatrix($packages);
-
-        // Normalisasi matriks
-        $normalizedMatrix = $this->normalizeMatrix($decisionMatrix);
-
-        // Matriks normalisasi berbobot
-        $weightedMatrix = $this->calculateWeightedNormalizedMatrix($normalizedMatrix, $weights);
-
-        // Solusi ideal & anti-ideal
-        list($idealSolution, $antiIdealSolution) = $this->determineIdealAndAntiIdealSolutions($weightedMatrix);
-
-        // Hitung jarak ke solusi ideal & anti-ideal
-        $distances = $this->calculateDistances($weightedMatrix, $idealSolution, $antiIdealSolution);
-
-        // Hitung skor akhir berdasarkan jarak
-        $scores = $this->calculateFinalScores($distances);
-
-        // Tambahkan skor ke paket dan urutkan
-        foreach ($packages as $index => $package) {
-            $package->topsis_score = $scores[$index];
-        }
-
-        // Urutkan paket berdasarkan skor TOPSIS secara menurun
-        $rankedPackages = $packages->sortByDesc('topsis_score');
-
-        return $rankedPackages;
-    }
-
 }
-
-

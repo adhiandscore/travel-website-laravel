@@ -7,7 +7,8 @@
             <div class="row mb-2">
                 <div class="col-sm-12 d-flex justify-content-between">
                     <h1 class="m-0">Tambah Peket Wisata</h1>
-                    <a href="{{ route('admin.travel_packages.index') }}" class="btn btn-primary"> <i class="fa fa-arrow-left"></i> </a>
+                    <a href="{{ route('admin.travel_packages.index') }}" class="btn btn-primary"> <i
+                            class="fa fa-arrow-left"></i> </a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -23,49 +24,114 @@
                         <form method="post" action="{{ route('admin.travel_packages.store') }}">
                             @csrf
                             <div class="form-group row border-bottom pb-4">
-                                <label for="type" class="col-sm-2 col-form-label">Tipe</label>
+                                <label for="type" class="col-sm-2 col-form-label">Nama</label>
                                 <div class="col-sm-10">
-                                <input type="text" class="form-control" name="type" value="{{ old('type') }}" id="type" placeholder="example: 4D5N">
+                                    <input type="text" class="form-control" name="type" id="type"
+                                        value="{{ old('type') }}" placeholder="example: Paket Wisata Bali">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
-                                <label for="type" class="col-sm-2 col-form-label">Kelas</label>
+                                <label for="location" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                <input type="text" class="form-control" name="level" value="{{ old('level') }}" id="level" placeholder="Paket Gold, Paket Silver, Paket Bronze">
+                                    <input type="text" class="form-control" name="location" id="location"
+                                        value="{{ old('location') }}" placeholder="Exp: Bali, Lombok, Jogja">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
-                                <label for="Location" class="col-sm-2 col-form-label">Lokasi</label>
+                                <label for="destination" class="col-sm-2 col-form-label">Destinasi</label>
                                 <div class="col-sm-10">
-                                <input text="text" class="form-control" id="Location" name="location" value="{{ old('location') }}" placeholder="example: Bali, Indonesia">
+                                    <input type="text" class="form-control" name="destination" id="destination"
+                                        value="{{ old('destination') }}" placeholder="Exp:Pantai, Pusat Belanja, Konser">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
                                 <label for="facility" class="col-sm-2 col-form-label">Fasilitas</label>
                                 <div class="col-sm-10">
-                                <input text="number" class="form-control" id="facility" name="facility" value="{{ old('facility') }}" placeholder="Fasilitas">
+                                    <input type="text" class="form-control" name="facility" id="facility"
+                                        value="{{ old('facility') }}" placeholder="Exp: karaoke, bus ac, asuransi dll">
                                 </div>
                             </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="acomodation" class="col-sm-2 col-form-label">Akomodasi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="acomodation" id="acomodation"
+                                        value="{{ old('acomodation') }}" placeholder="Exp: Hotel, penginapan dll">
+                                    
+                                </div>
+                            </div>
+
                             <div class="form-group row border-bottom pb-4">
                                 <label for="duration" class="col-sm-2 col-form-label">Durasi</label>
                                 <div class="col-sm-10">
-                                <input text="number" class="form-control" id="duration" name="duration" value="{{ old('duration') }}" placeholder="duration">
+                                    <input type="text" class="form-control" name="duration" id="duration"
+                                        value="{{ old('duration') }}" placeholder="Contoh 1 hari 1 malam">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
                                 <label for="price" class="col-sm-2 col-form-label">Harga</label>
                                 <div class="col-sm-10">
-                                <input text="number" class="form-control" id="price" name="price" value="{{ old('price') }}" placeholder="example: 300">
+                                    <input type="number" class="form-control" name="price" id="price"
+                                        value="{{ old('price') }}" placeholder="Harga dalam Rupiah (contoh: 5000000)">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
                                 <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="description" name="type" id="description" cols="30" rows="7" placeholder="Description text...">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="7"
+                                        placeholder="Masukkan deskripsi lengkap...">{{ old('description') }}</textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="consumption" class="col-sm-2 col-form-label">Konsumsi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="consumption" id="consumption"
+                                        value="{{ old('consumption') }}" placeholder="Exp: 3 Meals/Day">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="souvenir" class="col-sm-2 col-form-label">Souvenir</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="souvenir" id="souvenir"
+                                        value="{{ old('souvenir') }}" placeholder="Exp: T-Shirt, Keychain">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="documentation" class="col-sm-2 col-form-label">Dokumentasi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="documentation" id="documentation"
+                                        value="{{ old('documentation') }}" placeholder="Exp: Photo, Video">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="seat_capacity" class="col-sm-2 col-form-label">Jumlah Kursi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="seat_capacity" id="seat_capacity"
+                                        value="{{ old('seat_capacity') }}"
+                                        placeholder="Jumlah kursi yang tersedia (contoh: 20)">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="bonus" class="col-sm-2 col-form-label">Bonus</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="bonus" id="bonus"
+                                        value="{{ old('bonus') }}" placeholder="Exp: Free Spa, Free Ticket">
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -76,20 +142,20 @@
 @endsection
 
 @section('styles')
-<style>
-.ck-editor__editable_inline {
-    min-height: 200px;
-}
-</style>
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
+    </style>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create( document.querySelector( '#description' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-</script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

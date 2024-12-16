@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\TravelPackageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPreferencesController;
 use App\Http\Controllers\TopsisController;
-
+use App\Http\Controllers\RatingController;
 
 
 /*
@@ -45,6 +45,14 @@ Route::group(['middleware' => ['is_admin', 'auth'], 'prefix' => 'admin', 'as' =>
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('homepage');
 // travel packages
 
+// rating
+Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+
+// cari
+Route::post('/travel_packages/search', [\App\Http\Controllers\TravelPackageController::class, 'search'])->name('travel_packages.search');
+Route::get('/travel_packages', [\App\Http\Controllers\TravelPackageController::class, 'index'])->name('travel_packages.index');
+
+
 Route::middleware(['auth'])->group(function () {
     Route::put('preferences', [UserPreferencesController::class, 'updatePreferences'])->name('preferences.update');
 
@@ -52,12 +60,11 @@ Route::middleware(['auth'])->group(function () {
 // rating
 Route::post('travel_packages/{id}/rate', [\App\Http\Controllers\Admin\TravelPackageController::class, 'rate'])->name('travel_packages.rate');
 
-// Topsis
-// Route::get('travel-packages', [\App\Http\Controllers\TopsisController::class, 'getRecommendedPackages'])->name('travel_packages.index');
+// Tops
 // paket travel
 Route::get('travel-packages', [\App\Http\Controllers\TravelPackageController::class, 'index'])->name('travel_package.index');
-Route::get('travel-packages/{travel_package}', [\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_package.show');
-// Route::get('travel-packages/{id}', [\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_package.show');
+Route::get('travel-packages/{travel_package}', [\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_packages.show');
+Route::get('travel-packages/{id}', [\App\Http\Controllers\TravelPackageController::class, 'show'])->name('travel_package.show');
 // blogs
 Route::get('blogs', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
 Route::get('blogs/{blog:slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');

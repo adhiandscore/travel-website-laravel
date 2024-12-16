@@ -1,4 +1,4 @@
-```php:resources/views/layouts/navigation.blade.php
+
 <!-- Sidebar -->
 <div class="sidebar">
     <!-- Sidebar user panel -->

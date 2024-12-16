@@ -87,37 +87,47 @@
                             @csrf
                             @method('put')
                             <div class="form-group row border-bottom pb-4">
-                                <label for="type" class="col-sm-2 col-form-label">Type</label>
+                                <label for="type" class="col-sm-2 col-form-label">Nama</label>
                                 <div class="col-sm-10">
-                                <input type="text" class="form-control" name="type" value="{{ old('type', $travel_package->type) }}" id="type" placeholder="example: 4D5N">
+                                <input type="text" class="form-control" name="type" value="{{ old('type', $travel_package->type) }}" id="type" placeholder="example: Paket Wisata Bali">
                                 </div>
                             </div>
+                            
                             <div class="form-group row border-bottom pb-4">
-                                <label for="type" class="col-sm-2 col-form-label">Kelas</label>
-                                <div class="col-sm-10">
-                                <input type="text" class="form-control" name="level" value="{{ old('level', $travel_package->type) }}" id="level" placeholder="Gold, Silver, Bronze">
-                                </div>
-                            </div>
-                            <div class="form-group row border-bottom pb-4">
-                                <label for="Location" class="col-sm-2 col-form-label">Location</label>
+                                <label for="Location" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
                                 <input text="text" class="form-control" id="Location" name="location" value="{{ old('location', $travel_package->location) }}" placeholder="example: Bali, Indonesia">
                                 </div>
                             </div>
+
                             <div class="form-group row border-bottom pb-4">
-                                <label for="price" class="col-sm-2 col-form-label">Fasilitas</label>
+                                <label for="destination" class="col-sm-2 col-form-label">Destinasi</label>
                                 <div class="col-sm-10">
-                                <input text="number" class="form-control" id="facility" name="price" value="{{ old('facility', $travel_package->facility) }}" placeholder="facility">
+                                <input text="text" class="form-control" id="destination" name="destination" value="{{ old('destination', $travel_package->destination) }}" placeholder="example: pusat perbelanjaan, konser">
                                 </div>
                             </div>
                             <div class="form-group row border-bottom pb-4">
-                                <label for="price" class="col-sm-2 col-form-label">Durasi</label>
+                                <label for="facility" class="col-sm-2 col-form-label">Fasilitas</label>
                                 <div class="col-sm-10">
-                                <input text="number" class="form-control" id="duration" name="price" value="{{ old('duration', $travel_package->duration) }}" placeholder="duration">
+                                <input text="number" class="form-control" id="facility" name="facility" value="{{ old('facility', $travel_package->facility) }}" placeholder="facility">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="acomodation" class="col-sm-2 col-form-label">Akomodasi</label>
+                                <div class="col-sm-10">
+                                <input text="text" class="form-control" id="acomodation" name="acomodation" value="{{ old('acomodation', $travel_package->acomodation) }}" placeholder="acomodation">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="duration" class="col-sm-2 col-form-label">Durasi</label>
+                                <div class="col-sm-10">
+                                <input text="text" class="duration" id="duration" name="duration" value="{{ old('duration', $travel_package->duration) }}" placeholder="duration">
                                 </div>
                             </div>
                             <div class="form-group row border-bottom pb-4">
-                                <label for="price" class="col-sm-2 col-form-label">Price</label>
+                                <label for="price" class="col-sm-2 col-form-label">Harga</label>
                                 <div class="col-sm-10">
                                 <input text="number" class="form-control" id="price" name="price" value="{{ old('price', $travel_package->price) }}" placeholder="example: 300">
                                 </div>
@@ -126,6 +136,47 @@
                                 <label for="description" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="description" name="type" id="description" cols="30" rows="7" placeholder="Description text...">{{ old('description', $travel_package->description) }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="consumption" class="col-sm-2 col-form-label">Konsumsi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="consumption" id="consumption"
+                                        value="{{ old('consumption') }}" placeholder="Exp: 3 Meals/Day">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="souvenir" class="col-sm-2 col-form-label">Souvenir</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="souvenir" id="souvenir"
+                                        value="{{ old('souvenir') }}" placeholder="Exp: T-Shirt, Keychain">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="documentation" class="col-sm-2 col-form-label">Dokumentasi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="documentation" id="documentation"
+                                        value="{{ old('documentation') }}" placeholder="Exp: Photo, Video">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="seat_capacity" class="col-sm-2 col-form-label">Jumlah Kursi</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="seat_capacity" id="seat_capacity"
+                                        value="{{ old('seat_capacity') }}"
+                                        placeholder="Jumlah kursi yang tersedia (contoh: 20)">
+                                </div>
+                            </div>
+
+                            <div class="form-group row border-bottom pb-4">
+                                <label for="bonus" class="col-sm-2 col-form-label">Bonus</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="bonus" id="bonus"
+                                        value="{{ old('bonus') }}" placeholder="Exp: Free Spa, Free Ticket">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success">Save</button>

@@ -16,10 +16,29 @@ return new class extends Migration
             $table->string('type');
             $table->string('slug')->unique();
             $table->string('location');
-            $table->integer('price');
-            $table->text('description');
+            $table->string('destination');
+            $table->json('facility')->nullable();
+            $table->json(column: 'acomodation')->nullable();
+            $table->string('consumption');
+            $table->string('souvenir')->nullable();
+            $table->string('documentation')->nullable();
+            $table->string('seat_capacity');
+            $table->string('bonus')->nullable();
+            $table->string('duration');
+            $table->decimal('price', 10, 2);
+            $table->text('description')->nullable();
+            $table->decimal('rating', 3, 2)->nullable();
             $table->timestamps();
+        
+            
+            // Kolom tambahan untuk normalisasi TOPSIS
+            $table->float('normalized_price')->nullable();
+            $table->float('normalized_duration')->nullable();
+            $table->float('normalized_location_score')->nullable();
+        
+            
         });
+        
     }
 
     /**

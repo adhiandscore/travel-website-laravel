@@ -34,7 +34,7 @@ class TravelPackageController extends Controller
      * Store a newly created resource in storage.
      */
 
-     private function createSlug($location, $id = null)
+    private function createSlug($location, $id = null)
     {
         $slug = Str::slug($location);
         $baseSlug = $slug;
@@ -50,16 +50,26 @@ class TravelPackageController extends Controller
 
     public function store(TravelPackageRequest $request)
     {
-        if($request->validated()) {
-            $slug = $this->createSlug($request->location);
-            $travel_package = TravelPackage::create($request->validated() + ['slug' => $slug ]);
-        }
+        // Validasi data menggunakan TravelPackageRequest
+        $validated = $request->validated();
 
+        // Membuat slug berdasarkan lokasi
+        $slug = $this->createSlug($validated['location']);
+
+        // Konversi kolom JSON (jika diperlukan)
+        $validated['facility'] = json_encode($validated['facility']);
+        $validated['acomodation'] = json_encode($validated['acomodation']);
+
+        // Tambahkan slug ke data yang akan disimpan
+        $travel_package = TravelPackage::create($validated + ['slug' => $slug]);
+
+        // Redirect ke halaman edit dengan pesan sukses
         return redirect()->route('admin.travel_packages.edit', [$travel_package])->with([
-            'message' => 'Success Created !',
-            'alert-type' => 'success'
+            'message' => 'Success Created!',
+            'alert-type' => 'success',
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +78,7 @@ class TravelPackageController extends Controller
     {
         $galleries = Gallery::paginate(10);
 
-        return view('admin.travel_packages.edit', compact('travel_package','galleries'));
+        return view('admin.travel_packages.edit', compact('travel_package', 'galleries'));
     }
 
     /**
@@ -76,7 +86,7 @@ class TravelPackageController extends Controller
      */
     public function update(TravelPackageRequest $request, TravelPackage $travel_package)
     {
-        if($request->validated()) {
+        if ($request->validated()) {
             $slug = Str::slug($request->location, '-');
             $travel_package->update($request->validated() + ['slug' => $slug]);
         }
@@ -87,12 +97,13 @@ class TravelPackageController extends Controller
         ]);
     }
 
-    public function rate(Request $request, $id) {
+    public function rate(Request $request, $id)
+    {
         // Validasi input
         $request->validate([
             'rating' => 'required|integer|between:1,5',
         ]);
-    
+
         // Temukan travel package berdasarkan ID
         $travelPackage = TravelPackage::find($id);
         if ($travelPackage) {
@@ -100,15 +111,15 @@ class TravelPackageController extends Controller
             $travelPackage->ratings()->create([
                 'rating' => $request->input('rating'),
             ]);
-    
+
             // Hitung rata-rata rating
             $averageRating = $travelPackage->ratings()->avg('rating');
             $travelPackage->rating = $averageRating; // Update kolom rating di travel_packages
             $travelPackage->save();
-    
+
             return redirect()->back()->with('message', 'Rating berhasil disimpan!');
         }
-    
+
         return redirect()->back()->with('error', 'Travel package tidak ditemukan.');
     }
 
