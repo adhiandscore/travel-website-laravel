@@ -26,12 +26,7 @@
                         <p>{{ __('Users') }}</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.bookings.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>{{ __('Booking') }}</p>
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a href="{{ route('admin.travel_packages.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-hotel"></i>
